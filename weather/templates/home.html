@@ -1,5 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Howdy maz?!</h1>
+
+<br />
+{% if location %}
+{{ location }}
+{% endif %}
+
+{% if api %}
+{% if api == "Error" %}
+There was an error. Please try again!
+{% else %}
+
+<div class="jumbotron">
+    <h1 class="display-4">{{ api.location.name }}, {{ api.location.country }}</h1>
+    <p class="lead">{{ api.current.condition.text }}, {{ api.current.temp_c }}&deg;C</p>
+    <hr class="my-4">
+    <p>UV: {{ api.current.uv }}</p>
+    <p>Humidity: {{ api.current.humidity }}%</p>
+</div>
+
+{% endif %}
+{% endif %}
 {% endblock %}
